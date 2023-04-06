@@ -6,13 +6,18 @@ const port = 3000;
 const mongoose = require('mongoose');
 // 啟用 Handlebars
 const exphbs = require('express-handlebars');
+// 啟用 body-parser
+const bodyParser = require('body-parser');
 
 // 樣板引擎指定為 Handlebars
-app.engine(
-  'handlebars',
-  exphbs({ defaultLayout: 'main', extname: '.handlebars' })
-);
+app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
 app.set('view engine', 'handlebars');
+
+// 載入 public
+app.use(express.static('public'));
+
+// 每筆請求都要透過 body-parser 作前置處理
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // 僅在非正式環境時, 使用 dotenv
 if (process.env.NODE_ENV !== 'production') {
