@@ -72,3 +72,8 @@ button.copy {
   border: 1px solid white;
   color: white;
 }
+
+button.copy:hover {
+  background-color: rgb(65, 65, 250);
+  border: 1px solid rgb(65, 65, 250);
+}
