@@ -4,8 +4,8 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 // 可以用 new Schema() 的方式來建構一個新的 Schema
 const urlSchema = new Schema({
-  shortURL: { type: String, required: true },
-  originalURL: { type: String, required: true },
+  shortURL: { type: String, required: true, unique: true },
+  originalURL: { type: String, required: true, unique: true },
 });
 // 透過 module.exports 輸出
 module.exports = mongoose.model('URL', urlSchema);
