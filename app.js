@@ -7,6 +7,8 @@ const port = 3000;
 const exphbs = require('express-handlebars');
 // 載入 body-parser
 const bodyParser = require('body-parser');
+// 載入路由器
+const routes = require('./routes');
 // 載入 mongoose
 require('./config/mongoose');
 
@@ -17,11 +19,8 @@ app.set('view engine', 'handlebars');
 app.use(express.static('public'));
 // 每筆請求都要透過 body-parser 作前置處理
 app.use(bodyParser.urlencoded({ extended: true }));
-
-// 設定首頁路由
-app.get('/', (req, res) => {
-  res.render('index');
-});
+// 將 request 導入路由器
+app.use(routes);
 
 // 設定 port 3000
 app.listen(port, () => {
