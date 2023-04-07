@@ -34,5 +34,22 @@ router.post('/', (req, res) => {
     );
 });
 
+// 導向 originalURL
+router.get('/:shortURL', (req, res) => {
+  const shortURL = req.params.shortURL;
+  URL.findOne({ shortURL })
+    .then((data) => {
+      if (!data) {
+        res.render('index', {
+          errorMsg: '找不到相符的URL。',
+          checkMsg: '請再確認一下!',
+        });
+        return;
+      }
+      res.redirect(data.originalURL);
+    })
+    .catch((error) => console.log(error));
+});
+
 // 匯出路由器
 module.exports = router;
